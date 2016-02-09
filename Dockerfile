@@ -5,6 +5,9 @@ RUN apt-get update && \
 	DEBIAN_FRONTEND=noninteractive apt-get -yq install php5 php5-cli php5-curl curl && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN php /usr/local/bin/composer self-update
+
 COPY init.sh /init.sh
 RUN chmod +x /init.sh
 
