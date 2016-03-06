@@ -13,6 +13,6 @@ elif [ "$SYMFONY_ENV" == "test" ]; then
 	composer install
 else
 	composer install --no-dev --optimize-autoloader
-	php app/console cache:clear --env=$env --no-debug
-	php app/console assetic:dump --env=$env --no-debug
+	php app/console cache:clear --env=$SYMFONY_ENV --no-debug
+	php app/console assetic:dump --env=$SYMFONY_ENV --no-debug
 fi
