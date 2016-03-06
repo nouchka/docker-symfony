@@ -1,0 +1,13 @@
+version: '2'
+services:
+  symfony:
+    build: .
+    container_name: "symfony"
+    ports:
+      - "80:80"
+    environment:
+      SYMFONY_ENV: dev
+      SYMFONY_DIRECTORY: /var/www
+      APACHE_VHOST: 001-vhost
+    volumes:
+      - ./sites-available:/etc/apache2/sites-available
