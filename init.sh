@@ -3,6 +3,10 @@
 echo $SYMFONY_ENV
 cd $SYMFONY_DIRECTORY
 
+if [ ! -f "composer.json" ]; then
+	symfony new new_project
+fi
+
 if [ "$SYMFONY_ENV" == "dev" ]; then
 	composer install
 elif [ "$SYMFONY_ENV" == "test" ]; then
