@@ -17,7 +17,3 @@ else
 	php app/console cache:clear --env=$SYMFONY_ENV --no-debug
 	php app/console assetic:dump --env=$SYMFONY_ENV --no-debug
 fi
-
-a2ensite $APACHE_VHOST
-
-/usr/sbin/apache2 -D FOREGROUND

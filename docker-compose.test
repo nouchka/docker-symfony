@@ -3,6 +3,7 @@ services:
   symfony:
     build: .
     container_name: "symfony"
+    entrypoint: /start.sh
     ports:
       - "80:80"
     environment:
