@@ -4,7 +4,10 @@ echo $SYMFONY_ENV
 cd $SYMFONY_DIRECTORY
 
 if [ ! -f "composer.json" ]; then
-	symfony new new_project
+	cd /tmp/
+	symfony new $SYMFONY_NAME
+	rsync -rz /tmp/$SYMFONY_NAME/ $SYMFONY_DIRECTORY/
+	cd $SYMFONY_DIRECTORY
 fi
 
 if [ "$SYMFONY_ENV" == "dev" ]; then

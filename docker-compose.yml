@@ -9,6 +9,7 @@ services:
     environment:
       SYMFONY_ENV: dev
       SYMFONY_DIRECTORY: /var/www
+      SYMFONY_NAME: new_project
       APACHE_VHOST: 001-vhost
     volumes:
       - ./sites-available:/etc/apache2/sites-available
