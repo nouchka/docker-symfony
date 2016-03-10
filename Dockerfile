@@ -32,5 +32,9 @@ ENV APACHE_PID_FILE /var/run/apache2/apache2.pid
 RUN usermod -u 1000 www-data
 RUN groupmod -g 1000 www-data
 
+##PHP date.timezone
+RUN echo "date.timezone = UTC" >> /etc/php5/cli/php.ini
+RUN echo "date.timezone = UTC" >> /etc/php5/apache2/php.ini
+
 VOLUME /etc/apache2/sites-available
 CMD /init.sh
