@@ -2,7 +2,7 @@ FROM debian:jessie
 MAINTAINER Jean-Avit Promis "docker@katagena.com"
 
 RUN apt-get update && \
-	DEBIAN_FRONTEND=noninteractive apt-get -yq install php5-mysql php5 php5-cli php5-curl curl git apache2 libapache2-mod-php5 php5-gd php5-imagick php5-intl php5-mcrypt php5-xdebug php5-apcu memcached php5-memcached && \
+	DEBIAN_FRONTEND=noninteractive apt-get -yq install php5-mysql php5-redis php5 php5-cli php5-curl curl git apache2 libapache2-mod-php5 php5-gd php5-imagick php5-intl php5-mcrypt php5-xdebug php5-apcu memcached php5-memcached && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -36,5 +36,10 @@ RUN groupmod -g 1000 www-data
 RUN echo "date.timezone = UTC" >> /etc/php5/cli/php.ini
 RUN echo "date.timezone = UTC" >> /etc/php5/apache2/php.ini
 
+##in start.sh with conf on name and port
+RUN sed -i 's/session.save_handler = files/session.save_handler = redis/g' /etc/php5/apache2/php.ini &&\
+	echo 'session.save_path = tcp://redis:6379' >> /etc/php5/apache2/php.ini
+
 VOLUME /etc/apache2/sites-available
+EXPOSE 80
 CMD /init.sh
