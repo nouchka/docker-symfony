@@ -17,7 +17,11 @@ elif [ "$SYMFONY_ENV" == "test" ]; then
 else
 	##TODO desactivate php5-xdebug
 	composer install --no-dev --optimize-autoloader
-	php app/console cache:clear --env=$SYMFONY_ENV --no-debug
-	php app/console assetic:dump --env=$SYMFONY_ENV --no-debug
+	CONSOLE="bin/console"
+	if [ -f "app/console" ]; then
+		CONSOLE="app/console"
+	fi
+	php $CONSOLE cache:clear --env=$SYMFONY_ENV --no-debug
+	php $CONSOLE assetic:dump --env=$SYMFONY_ENV --no-debug
 fi
 chown -R www-data: $SYMFONY_DIRECTORY

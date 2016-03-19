@@ -15,6 +15,8 @@ COPY init.sh /init.sh
 RUN chmod +x /init.sh
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
+COPY init_start.sh /init_start.sh
+RUN chmod +x /init_start.sh
 
 ENV SYMFONY_ENV production
 ENV SYMFONY_DIRECTORY /var/www/
