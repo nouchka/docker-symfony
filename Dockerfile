@@ -18,7 +18,7 @@ RUN chmod +x /start.sh
 COPY init_start.sh /init_start.sh
 RUN chmod +x /init_start.sh
 
-ENV SYMFONY_ENV production
+ENV SYMFONY_ENV prod
 ENV SYMFONY_DIRECTORY /var/www/
 ENV APACHE_VHOST 000-default
 

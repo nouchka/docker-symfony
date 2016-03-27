@@ -2,6 +2,8 @@
 
 echo $SYMFONY_ENV
 
+cd $SYMFONY_DIRECTORY
+
 if [ ! -f "composer.json" ]; then
 	cd /tmp/
 	symfony new $SYMFONY_NAME
