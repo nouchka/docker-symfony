@@ -17,7 +17,7 @@ if [ "$SYMFONY_ENV" == "dev" ]; then
 elif [ "$SYMFONY_ENV" == "test" ]; then
 	composer install
 else
-	##TODO desactivate php5-xdebug
+	php5dismod xdebug
 	composer install --no-dev --optimize-autoloader
 	CONSOLE="bin/console"
 	if [ -f "app/console" ]; then
