@@ -33,6 +33,7 @@ ENV APACHE_RUN_DIR /var/run/apache2
 ENV APACHE_PID_FILE /var/run/apache2/apache2.pid
 RUN usermod -u 1000 www-data
 RUN groupmod -g 1000 www-data
+RUN usermod -s /bin/bash www-data
 
 ##PHP date.timezone
 RUN echo "date.timezone = UTC" >> /etc/php5/cli/php.ini
