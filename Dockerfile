@@ -11,6 +11,9 @@ RUN php /usr/local/bin/composer self-update
 RUN curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony
 RUN chmod a+x /usr/local/bin/symfony
 
+RUN curl http://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer
+RUN chmod a+x /usr/local/bin/php-cs-fixer
+
 COPY init.sh /init.sh
 RUN chmod +x /init.sh
 COPY start.sh /start.sh
