@@ -2,7 +2,7 @@ FROM debian:jessie
 MAINTAINER Jean-Avit Promis "docker@katagena.com"
 
 RUN apt-get update && \
-	DEBIAN_FRONTEND=noninteractive apt-get -yq install php5-mysql php5-redis php5 php5-cli php5-curl curl git apache2 libapache2-mod-php5 php5-gd php5-imagick php5-intl php5-mcrypt php5-xdebug php5-apcu memcached php5-memcached && \
+	DEBIAN_FRONTEND=noninteractive apt-get -yq install php5-mysql php5-redis php5 php5-cli php5-curl curl git apache2 libapache2-mod-php5 php5-gd imagemagick php5-imagick php5-intl php5-mcrypt php5-xdebug php5-apcu memcached php5-memcached && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
