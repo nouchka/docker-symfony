@@ -17,17 +17,19 @@ initSf () {
 	fi
 	if [ ${!INIT_NAME} ]; then
 		if [ "$SYMFONY_ENV" == "dev" ]; then
-			composer install
+			su www-data -c "composer install"
 		elif [ "$SYMFONY_ENV" == "test" ]; then
-			composer install
+			su www-data -c "composer install"
 		else
-			composer install --no-dev --optimize-autoloader
 			CONSOLE="bin/console"
 			if [ -f "app/console" ]; then
 				CONSOLE="app/console"
 			fi
-			php $CONSOLE cache:clear --env=$SYMFONY_ENV --no-debug
-			php $CONSOLE assetic:dump --env=$SYMFONY_ENV --no-debug
+			su www-data <<'EOF'
+composer install --no-dev --optimize-autoloader
+php $CONSOLE cache:clear --env=$SYMFONY_ENV --no-debug
+php $CONSOLE assetic:dump --env=$SYMFONY_ENV --no-debug
+EOF
 		fi
 	fi
 	if [ ${!POST_NAME} ]; then
