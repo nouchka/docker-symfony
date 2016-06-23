@@ -41,6 +41,5 @@ RUN echo "date.timezone = UTC" >> /etc/php5/apache2/php.ini
 RUN sed -i 's/session.save_handler = files/session.save_handler = redis/g' /etc/php5/apache2/php.ini &&\
 	echo 'session.save_path = tcp://redis:6379' >> /etc/php5/apache2/php.ini
 
-VOLUME /etc/apache2/sites-available
 EXPOSE 80
 CMD /start.sh
