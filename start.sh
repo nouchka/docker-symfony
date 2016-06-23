@@ -1,12 +1,63 @@
 #!/bin/bash
 
-a2ensite $APACHE_VHOST
+initSf () {
+	cd `dirname $SYMFONY_DIRECTORY/$1`
+	ENV_NAME="$(basename `pwd`)"
+	INIT_NAME="SYMFONY_INIT_${ENV_NAME,,}"
+	PRE_NAME="SYMFONY_PREV_${ENV_NAME,,}"
+	POST_NAME="SYMFONY_POST_${ENV_NAME,,}"
+	echo $ENV_NAME
+	if [ ${!PRE_NAME} ]; then
+		if [ -f ${!PRE_NAME} ]; then
+			chmod +x ${!PRE_NAME}
+			${!PRE_NAME}
+		else
+			echo "File missing "${!PRE_NAME}
+		fi
+	fi
+	if [ ${!INIT_NAME} ]; then
+		if [ "$SYMFONY_ENV" == "dev" ]; then
+			composer install
+		elif [ "$SYMFONY_ENV" == "test" ]; then
+			composer install
+		else
+			composer install --no-dev --optimize-autoloader
+			CONSOLE="bin/console"
+			if [ -f "app/console" ]; then
+				CONSOLE="app/console"
+			fi
+			php $CONSOLE cache:clear --env=$SYMFONY_ENV --no-debug
+			php $CONSOLE assetic:dump --env=$SYMFONY_ENV --no-debug
+		fi
+	fi
+	if [ ${!POST_NAME} ]; then
+		if [ -f ${!POST_NAME} ]; then
+			chmod +x ${!POST_NAME}
+			${!POST_NAME}
+		else
+			echo "File missing "${!POST_NAME}
+		fi
+	fi
+	chown -R www-data: .
+}
+export -f initSf
+
+if [ "$SYMFONY_ENV" == "dev" ]; then
+	echo "Env "$SYMFONY_ENV
+elif [ "$SYMFONY_ENV" == "test" ]; then
+	echo "Env "$SYMFONY_ENV
+else
+	echo "Env "$SYMFONY_ENV
+	php5dismod xdebug
+fi
+
 
 cd $SYMFONY_DIRECTORY
 
-CONSOLE="bin/console"
-if [ -f "app/console" ]; then
-	CONSOLE="app/console"
+if [ -f "composer.json" ]; then
+	initSf composer.json
+else
+	find . -maxdepth 2 -name 'composer.json' -exec bash -c 'initSf "$0"' {} \;
 fi
 
 /usr/sbin/apache2 -D FOREGROUND

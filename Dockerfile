@@ -14,16 +14,11 @@ RUN chmod a+x /usr/local/bin/symfony
 RUN curl http://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer
 RUN chmod a+x /usr/local/bin/php-cs-fixer
 
-COPY init.sh /init.sh
-RUN chmod +x /init.sh
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
-COPY init_start.sh /init_start.sh
-RUN chmod +x /init_start.sh
 
 ENV SYMFONY_ENV prod
 ENV SYMFONY_DIRECTORY /var/www/
-ENV APACHE_VHOST 000-default
 
 ##Apache
 RUN a2enmod rewrite
@@ -48,4 +43,4 @@ RUN sed -i 's/session.save_handler = files/session.save_handler = redis/g' /etc/
 
 VOLUME /etc/apache2/sites-available
 EXPOSE 80
-CMD /init.sh
+CMD /start.sh

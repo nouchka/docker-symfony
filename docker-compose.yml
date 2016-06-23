@@ -1,15 +1,16 @@
 version: '2'
 services:
   symfony:
-    image: nouchka/symfony
-    container_name: "symfony"
-    entrypoint: /start.sh
+    build: .
     ports:
-      - "80:80"
+      - "8080:80"
     environment:
-      SYMFONY_ENV: dev
-      SYMFONY_DIRECTORY: /var/www
-      SYMFONY_NAME: new_project
-      APACHE_VHOST: 001-vhost
+      - SYMFONY_ENV=dev
+      - SYMFONY_DIRECTORY=/var/www
+      - SYMFONY_INIT_site1=True
+      - SYMFONY_PREV_site1=./init.sh
+      - SYMFONY_POST_site2=./launch.sh
     volumes:
-      - ./sites-available:/etc/apache2/sites-available
+      - ./samples/site1/001-vhost:/etc/apache2/sites-enabled/001-vhost
+      - ./samples/site1:/var/www/site1
+      - ./samples/site2:/var/www/site2
