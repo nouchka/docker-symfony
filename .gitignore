@@ -1,5 +1,4 @@
 .project
-docker-compose.test.yml
 samples/site1/vendor
 samples/site1/composer.lock
 samples/site2/composer.lock
