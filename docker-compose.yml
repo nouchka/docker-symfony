@@ -2,10 +2,11 @@ version: '2'
 services:
   symfony:
     build: .
+    container_name: "symfony"
     ports:
       - "8080:80"
     environment:
-      - SYMFONY_ENV=dev
+      - SYMFONY_ENV=prod
       - SYMFONY_DIRECTORY=/var/www
       - SYMFONY_INIT_site1=True
       - SYMFONY_PREV_site1=./init.sh

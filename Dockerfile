@@ -14,8 +14,6 @@ RUN chmod a+x /usr/local/bin/symfony
 RUN curl http://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer
 RUN chmod a+x /usr/local/bin/php-cs-fixer
 
-COPY start.sh /start.sh
-RUN chmod +x /start.sh
 
 ENV SYMFONY_ENV prod
 ENV SYMFONY_DIRECTORY /var/www/
@@ -40,6 +38,11 @@ RUN echo "date.timezone = UTC" >> /etc/php5/apache2/php.ini
 ##in start.sh with conf on name and port
 RUN sed -i 's/session.save_handler = files/session.save_handler = redis/g' /etc/php5/apache2/php.ini &&\
 	echo 'session.save_path = tcp://redis:6379' >> /etc/php5/apache2/php.ini
+
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+WORKDIR /var/www
 
 EXPOSE 80
 CMD /start.sh

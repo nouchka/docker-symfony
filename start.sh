@@ -1,7 +1,8 @@
 #!/bin/bash
 
 initSf () {
-	cd `dirname $SYMFONY_DIRECTORY/$1`
+	CURRENT_DIR=`dirname $SYMFONY_DIRECTORY/$1`
+	cd $CURRENT_DIR
 	ENV_NAME="$(basename `pwd`)"
 	INIT_NAME="SYMFONY_INIT_${ENV_NAME,,}"
 	PRE_NAME="SYMFONY_PREV_${ENV_NAME,,}"
@@ -21,14 +22,17 @@ initSf () {
 		elif [ "$SYMFONY_ENV" == "test" ]; then
 			su www-data -c "composer install"
 		else
-			CONSOLE="bin/console"
-			if [ -f "app/console" ]; then
+			if [ ! -f "app/console" ]; then
 				CONSOLE="app/console"
+				mkdir -p app/
+				cd app/
+				ln -s $CURRENT_DIR/bin/console console
+				cd ..
 			fi
 			su www-data <<'EOF'
 composer install --no-dev --optimize-autoloader
-php $CONSOLE cache:clear --env=$SYMFONY_ENV --no-debug
-php $CONSOLE assetic:dump --env=$SYMFONY_ENV --no-debug
+php app/console cache:clear --env=$SYMFONY_ENV --no-debug
+php app/console assetic:dump --env=$SYMFONY_ENV --no-debug
 EOF
 		fi
 	fi
