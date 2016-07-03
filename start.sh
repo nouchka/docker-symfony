@@ -59,6 +59,7 @@ fi
 
 
 cd $SYMFONY_DIRECTORY
+mkdir -p /var/www/.composer
 chown -R www-data: /var/www/.composer
 
 if [ -f "composer.json" ]; then
