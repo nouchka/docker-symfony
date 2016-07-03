@@ -1,4 +1,5 @@
 version: '2'
+
 services:
   symfony:
     build: .
@@ -15,3 +16,8 @@ services:
       - ./samples/site1/001-vhost:/etc/apache2/sites-enabled/001-vhost
       - ./samples/site1:/var/www/site1
       - ./samples/site2:/var/www/site2
+      - composer:/var/www/.composer
+
+volumes:
+  composer:
+    driver: local

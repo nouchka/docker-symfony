@@ -59,6 +59,7 @@ fi
 
 
 cd $SYMFONY_DIRECTORY
+chown -R www-data: /var/www/.composer
 
 if [ -f "composer.json" ]; then
 	initSf composer.json
