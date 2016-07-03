@@ -67,4 +67,8 @@ else
 	find . -maxdepth 2 -name 'composer.json' -exec bash -c 'initSf "$0"' {} \;
 fi
 
+if [ $1 ]; then
+	exit 0
+fi
+
 /usr/sbin/apache2 -D FOREGROUND
