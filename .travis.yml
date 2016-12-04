@@ -1,0 +1,15 @@
+sudo: required
+services:
+  - docker
+
+before_script:
+  - docker-compose -f docker-compose.test.yml up -d
+
+script:
+  - docker ps
+
+after_script:
+  - docker-compose -f docker-compose.test.yml down
+
+notifications:
+  email: docker@katagena.com
