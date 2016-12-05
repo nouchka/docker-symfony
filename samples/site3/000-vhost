@@ -1,0 +1,10 @@
+<VirtualHost *:80>
+  CustomLog /var/log/apache2/www.site3.com-access.log combined
+  ErrorLog /var/log/apache2/www.site3.com-error.log
+  DocumentRoot /var/www/site3/web/
+	<Directory /var/www/site3/web/>
+		Allow from all
+		AllowOverride All
+		Require all granted
+	</Directory>
+</VirtualHost>
