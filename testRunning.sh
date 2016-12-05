@@ -1,5 +1,8 @@
 #!/bin/bash
 
+##Wait for init
+sleep 120
+
 response=$(curl --write-out %{http_code} --silent --output content.html http://localhost:8080/)
 
 echo "Response code "$response
