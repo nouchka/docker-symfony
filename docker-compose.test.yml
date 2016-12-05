@@ -1,4 +1,5 @@
 sut:
   build: .
+  entrypoint: /bin/true
   ports:
     - "8080:80"
