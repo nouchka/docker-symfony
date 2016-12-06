@@ -1,7 +1,6 @@
 sut:
   build: .
-  ##entrypoint: /bin/true
-  entrypoint: /var/www/init.sh
+  entrypoint: /bin/true
   ports:
     - "8080:80"
   environment:
