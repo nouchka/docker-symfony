@@ -1,7 +1,7 @@
 FROM debian:jessie
 MAINTAINER Jean-Avit Promis "docker@katagena.com"
 LABEL org.label-schema.vcs-url="https://github.com/nouchka/docker-symfony"
-LABEL version="5"
+LABEL version="latest"
 
 ARG PHPVERSION=5 \
 	PHPCONF=/etc/php5

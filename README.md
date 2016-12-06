@@ -5,7 +5,7 @@
 [![](https://images.microbadger.com/badges/image/nouchka/symfony.svg)](https://microbadger.com/images/nouchka/symfony "Get your own image badge on microbadger.com")
 [![](https://images.microbadger.com/badges/version/nouchka/symfony.svg)](https://microbadger.com/images/nouchka/symfony "Get your own version badge on microbadger.com")
 [![Docker Automated buil](https://img.shields.io/docker/automated/nouchka/symfony.svg)](https://hub.docker.com/r/nouchka/symfony/)
-[![Build Status](https://travis-ci.org/nouchka/docker-symfony.svg?branch=5)](https://travis-ci.org/nouchka/docker-symfony)
+[![Build Status](https://travis-ci.org/nouchka/docker-symfony.svg?branch=master)](https://travis-ci.org/nouchka/docker-symfony)
 
 # Versions
 
