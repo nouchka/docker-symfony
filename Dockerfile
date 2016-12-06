@@ -1,11 +1,13 @@
 FROM debian:jessie
 MAINTAINER Jean-Avit Promis "docker@katagena.com"
+LABEL org.label-schema.vcs-url="https://github.com/nouchka/docker-symfony"
+LABEL version="5"
+
+ARG PHPVERSION=5 \
+	PHPCONF=/etc/php5
 
 ENV SYMFONY_ENV=prod \
 	SYMFONY_DIRECTORY=/var/www/
-
-ENV PHPVERSION=5 \
-	PHPCONF=/etc/php5
 
 ENV APACHE_RUN_USER=www-data \
 	APACHE_RUN_GROUP=www-data \
