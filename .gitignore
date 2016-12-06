@@ -1,4 +1,5 @@
-.project
+/.project
+/.content.html
 samples/site1/app
 samples/site1/vendor
 samples/site1/composer.lock
