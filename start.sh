@@ -58,6 +58,7 @@ else
 fi
 
 
+chown -R www-data: $SYMFONY_DIRECTORY
 cd $SYMFONY_DIRECTORY
 mkdir -p /var/www/.composer
 chown -R www-data: /var/www/.composer
