@@ -31,6 +31,7 @@ initSf () {
 			fi
 			su www-data <<'EOF'
 composer install --no-dev --optimize-autoloader
+composer dump-autoload --no-dev -o
 php app/console cache:clear --env=$SYMFONY_ENV --no-debug
 php app/console assetic:dump --env=$SYMFONY_ENV --no-debug
 EOF
