@@ -74,4 +74,5 @@ if [ $1 ]; then
 	exit 0
 fi
 
+[ ! -f "/var/run/apache2/apache2.pid" ] || rm -f /var/run/apache2/apache2.pid
 /usr/sbin/apache2 -D FOREGROUND
