@@ -29,6 +29,9 @@ RUN curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony && \
 RUN curl http://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && \
 	chmod a+x /usr/local/bin/php-cs-fixer
 
+RUN curl -LsS https://phar.phpunit.de/phpunit.phar  -o /usr/local/bin/phpunit && \
+	chmod a+x /usr/local/bin/phpunit
+
 
 ##Apache
 RUN a2enmod rewrite && \
