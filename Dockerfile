@@ -51,6 +51,10 @@ RUN sed -i 's/session.save_handler = files/session.save_handler = redis/g' ${PHP
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
+COPY check.sh /check.sh
+RUN chmod +x /check.sh
+HEALTHCHECK CMD /check.sh
+
 WORKDIR /var/www
 
 EXPOSE 80
