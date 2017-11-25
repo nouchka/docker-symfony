@@ -2,12 +2,13 @@ ARG  BASE_IMAGE=jessie
 FROM debian:${BASE_IMAGE}
 LABEL maintainer docker@katagena.com
 LABEL org.label-schema.vcs-url="https://github.com/nouchka/docker-symfony"
-LABEL version="latest"
 
 ARG PHPVERSION=5
-ARG PHPCONF=/etc/php5
+ARG DOCKER_TAG=${PHPVERSION}
+ARG PHPCONF=/etc/php${PHPVERSION}
 ARG PUID=1000
 ARG PGID=1000
+LABEL version="${DOCKER_TAG}"
 
 ENV PUID ${PUID}
 ENV PGID ${PGID}
@@ -23,7 +24,26 @@ ENV APACHE_RUN_USER=www-data \
 	APACHE_PID_FILE=/var/run/apache2/apache2.pid
 
 RUN apt-get update && \
-	DEBIAN_FRONTEND=noninteractive apt-get -yq install php${PHPVERSION}-mysql php${PHPVERSION}-redis php${PHPVERSION} php${PHPVERSION}-cli php${PHPVERSION}-curl curl unzip git apache2 libapache2-mod-php${PHPVERSION} php${PHPVERSION}-gd imagemagick php${PHPVERSION}-imagick php${PHPVERSION}-intl php${PHPVERSION}-mcrypt php${PHPVERSION}-xdebug php${PHPVERSION}-apcu memcached php${PHPVERSION}-memcached && \
+	DEBIAN_FRONTEND=noninteractive apt-get -yq install \
+		curl \
+		unzip \
+		git \
+		memcached \
+		apache2 \
+		imagemagick \
+		php${PHPVERSION} \
+		php${PHPVERSION}-mysql \
+		php${PHPVERSION}-redis \
+		php${PHPVERSION}-cli \
+		php${PHPVERSION}-curl \
+		php${PHPVERSION}-gd \
+		php${PHPVERSION}-imagick \
+		php${PHPVERSION}-intl \
+		php${PHPVERSION}-mcrypt \
+		php${PHPVERSION}-xdebug \
+		php${PHPVERSION}-apcu \
+		php${PHPVERSION}-memcached \
+		libapache2-mod-php${PHPVERSION} && \
 	[ "$PHPVERSION" != "5" ] || apt-get -yq install php${PHPVERSION}-memcache && \
 	[ "$PHPVERSION" != "5" ] || ln -s /usr/sbin/php5dismod /usr/sbin/phpdismod && \
 	[ "$PHPVERSION" != "7.0" ] || apt-get -yq install php${PHPVERSION}-pdo-sqlite libnghttp2-dev php-memcache php${PHPVERSION}-xml php${PHPVERSION}-mbstring zip librsvg2-2 && \
