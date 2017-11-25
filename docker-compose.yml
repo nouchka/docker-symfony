@@ -2,7 +2,7 @@ version: '2'
 
 services:
   symfony:
-    image: nouchka/symfony:5
+    image: nouchka/symfony
     container_name: "symfony"
     ports:
       - "8080:80"

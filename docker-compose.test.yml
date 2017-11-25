@@ -1,12 +1,17 @@
-sut:
-  build: .
-  entrypoint: /bin/true
-  ports:
-    - "8080:80"
-  environment:
-    - SYMFONY_ENV=dev
-    - SYMFONY_DIRECTORY=/var/www
-    - SYMFONY_INIT_site3=True
-  volumes:
-    - ./samples/site3/init.sh:/var/www/init.sh
-    - ./samples/site3/000-vhost:/etc/apache2/sites-enabled/000-vhost.conf
+version: '2'
+
+services:
+  sut:
+    build: .
+    entrypoint: /bin/true
+    ports:
+      - "8080:80"
+    environment:
+      - SYMFONY_ENV=dev
+      - SYMFONY_DIRECTORY=/var/www
+      - SYMFONY_INIT_site3=True
+      - TEST_VARIABLE=Tintin
+    volumes:
+      - ./samples/site3/init.sh:/var/www/init.sh
+      - ./samples/site3/000-vhost:/etc/apache2/sites-enabled/000-vhost.conf
+      - ./samples/site3/TEST_SECRET:/run/secrets/TEST_SECRET

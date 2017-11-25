@@ -2,6 +2,18 @@
 
 [ ! -f "$APACHE_PID_FILE" ] || rm -f $APACHE_PID_FILE
 
+##Generate apache conf with secrets from docker
+APACHE_SECRETS_CONF_FILE="/etc/apache2/conf-enabled/secrets.conf"
+[ ! -f "$APACHE_SECRETS_CONF_FILE" ] || rm -f $APACHE_SECRETS_CONF_FILE
+if [ -d "/run/secrets/" ]; then
+find /run/secrets/ -type f| while read secret
+	do
+		name=`basename $secret`
+		value=`cat $secret`
+		echo "SetEnv $name $value" >> $APACHE_SECRETS_CONF_FILE
+	done
+fi
+
 initSf () {
 	CURRENT_DIR=`dirname $SYMFONY_DIRECTORY/$1`
 	cd $CURRENT_DIR
@@ -33,7 +45,7 @@ initSf () {
 			fi
 			su www-data <<'EOF'
 composer install --no-dev --optimize-autoloader
-composer dump-autoload --no-dev -o
+##composer dump-autoload --no-dev -o
 php app/console cache:clear --env=$SYMFONY_ENV --no-debug
 php app/console assetic:dump --env=$SYMFONY_ENV --no-debug
 EOF
@@ -57,7 +69,7 @@ elif [ "$SYMFONY_ENV" == "test" ]; then
 	echo "Env "$SYMFONY_ENV
 else
 	echo "Env "$SYMFONY_ENV
-	php5dismod xdebug
+	phpdismod xdebug
 fi
 
 

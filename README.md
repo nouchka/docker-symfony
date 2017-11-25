@@ -11,9 +11,9 @@
 
 Version follows php version
 
-* latest (based on master branch, iso branch 5)
-* 7.0 (based on branch 7.0)
-* 5 (based on branch 5)
+* latest
+* 7.0
+* 5
 
 # Image
 This image setup a apache2/php container with composer, symfony cmd, php-cs-fixer, xdebug, memcache and imagemagick. It fixs datetime to UTC and sessions are save to redis container.

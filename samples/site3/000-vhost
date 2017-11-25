@@ -6,5 +6,6 @@
 		Allow from all
 		AllowOverride All
 		Require all granted
+		PassEnv TEST_VARIABLE
 	</Directory>
 </VirtualHost>
