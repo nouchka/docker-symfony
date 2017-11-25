@@ -1,9 +1,11 @@
+dist: trusty
 sudo: required
 services:
   - docker
 
 before_script:
   - sudo apt-get -qq update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
   - sudo apt-get -qq install dnsutils
   - sed -i "s|/bin/true|/var/www/init.sh|" docker-compose.test.yml
   - docker version
