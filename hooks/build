@@ -10,8 +10,10 @@ fi
 
 if [ "$PHPVERSION" = "7.0" ]; then
 	BASE_IMAGE=stretch
+	PHPCONF=/etc/php/${PHPVERSION}
 elif [ "$PHPVERSION" = "5" ]; then
 	BASE_IMAGE=jessie
+	PHPCONF=/etc/php${PHPVERSION}
 else
 	echo "Need to specify base image"
 	exit 1
@@ -20,5 +22,6 @@ fi
 docker build -t ${IMAGE_NAME} \
 	--build-arg=BASE_IMAGE=$BASE_IMAGE \
 	--build-arg=PHPVERSION=$PHPVERSION \
+	--build-arg=PHPCONF=$PHPCONF \
 	--build-arg=DOCKER_TAG=$DOCKER_TAG \
 	.

@@ -4,8 +4,8 @@ LABEL maintainer docker@katagena.com
 LABEL org.label-schema.vcs-url="https://github.com/nouchka/docker-symfony"
 
 ARG PHPVERSION=5
-ARG DOCKER_TAG=${PHPVERSION}
 ARG PHPCONF=/etc/php${PHPVERSION}
+ARG DOCKER_TAG=${PHPVERSION}
 ARG PUID=1000
 ARG PGID=1000
 LABEL version="${DOCKER_TAG}"
