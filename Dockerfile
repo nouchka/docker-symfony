@@ -50,7 +50,7 @@ RUN apt-get update && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
 	a2enmod rewrite && \
 	a2enmod macro && \
-##	a2enmod http2 && \
+	a2enmod proxy && \
 	a2dissite 000-default && \
 	usermod -u ${PUID} www-data && \
 	groupmod -g ${PGID} www-data && \
