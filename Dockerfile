@@ -51,6 +51,7 @@ RUN apt-get update && \
 	a2enmod rewrite && \
 	a2enmod macro && \
 	a2enmod proxy && \
+	a2enmod ssl && \
 	a2enmod proxy_http && \
 	a2dissite 000-default && \
 	usermod -u ${PUID} www-data && \
