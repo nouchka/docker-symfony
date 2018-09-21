@@ -1,5 +1,6 @@
 # docker-symfony
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7d222075b0684281823270ec9f943a3a)](https://app.codacy.com/app/nouchka/docker-symfony?utm_source=github.com&utm_medium=referral&utm_content=nouchka/docker-symfony&utm_campaign=Badge_Grade_Dashboard)
 [![Docker Hub repository](http://dockeri.co/image/nouchka/symfony)](https://registry.hub.docker.com/u/nouchka/symfony/)
 
 [![](https://images.microbadger.com/badges/image/nouchka/symfony.svg)](https://microbadger.com/images/nouchka/symfony "Get your own image badge on microbadger.com")
