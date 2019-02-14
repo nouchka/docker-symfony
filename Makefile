@@ -1,13 +1,20 @@
-.DEFAULT_GOAL := usage
-IMAGE_NAME=nouchka/symfony
-DOCKER_TAG=latest
+DOCKER_IMAGE=symfony
+DOCKER_NAMESPACE=nouchka
 
-version-latest:
-	DOCKER_TAG=latest IMAGE_NAME=$(IMAGE_NAME):$(DOCKER_TAG) ./hooks/build
+.DEFAULT_GOAL := build
+VERSIONS=5 7.0 7.3
 
-version:
-	DOCKER_TAG=$(DOCKER_TAG) IMAGE_NAME=$(IMAGE_NAME):$(DOCKER_TAG) ./hooks/build
+build-latest:
+	$(MAKE) -s build-version VERSION=latest
 
-usage:
-	echo make version-latest $(DOCKER_TAG)
-	echo make version DOCKER_TAG=5
+build-version:
+	@chmod +x ./hooks/build
+	DOCKER_TAG=$(VERSION) IMAGE_NAME=$(DOCKER_NAMESPACE)/$(DOCKER_IMAGE):$(VERSION) ./hooks/build
+
+.PHONY: build
+build: build-latest
+	$(foreach version,$(VERSIONS), $(MAKE) -s build-version VERSION=$(version);)
+
+.PHONY: test
+test:
+	docker-compose -f docker-compose.test.yml up

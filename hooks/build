@@ -8,9 +8,12 @@ else
 	PHPVERSION=$DOCKER_TAG
 fi
 
-if [ "$PHPVERSION" = "7.0" ]; then
+PHPCONF=/etc/php/${PHPVERSION}
+
+if [ "$PHPVERSION" = "7.3" ]; then
+	BASE_IMAGE=buster
+elif [ "$PHPVERSION" = "7.0" ]; then
 	BASE_IMAGE=stretch
-	PHPCONF=/etc/php/${PHPVERSION}
 elif [ "$PHPVERSION" = "5" ]; then
 	BASE_IMAGE=jessie
 	PHPCONF=/etc/php${PHPVERSION}

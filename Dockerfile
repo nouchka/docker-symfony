@@ -23,6 +23,7 @@ ENV APACHE_RUN_USER=www-data \
 	APACHE_RUN_DIR=/var/run/apache2 \
 	APACHE_PID_FILE=/var/run/apache2/apache2.pid
 
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update && \
 	DEBIAN_FRONTEND=noninteractive apt-get -yq install \
 		curl \
@@ -39,14 +40,14 @@ RUN apt-get update && \
 		php${PHPVERSION}-gd \
 		php${PHPVERSION}-imagick \
 		php${PHPVERSION}-intl \
-		php${PHPVERSION}-mcrypt \
 		php${PHPVERSION}-xdebug \
 		php${PHPVERSION}-apcu \
 		php${PHPVERSION}-memcached \
 		libapache2-mod-php${PHPVERSION} && \
 	[ "$PHPVERSION" != "5" ] || apt-get -yq install php${PHPVERSION}-memcache && \
 	[ "$PHPVERSION" != "5" ] || ln -s /usr/sbin/php5dismod /usr/sbin/phpdismod && \
-	[ "$PHPVERSION" != "7.0" ] || apt-get -yq install php${PHPVERSION}-pdo-sqlite libnghttp2-dev php-memcache php${PHPVERSION}-xml php${PHPVERSION}-mbstring zip librsvg2-2 && \
+	[ "$PHPVERSION" == "5" ] || apt-get -yq install php${PHPVERSION}-pdo-sqlite libnghttp2-dev php-memcache php${PHPVERSION}-xml php-mbstring zip librsvg2-2 && \
+	[ "$PHPVERSION" == "7.3" ] || apt-get -yq install php${PHPVERSION}-mcrypt && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
 	a2enmod rewrite && \
 	a2enmod macro && \
@@ -82,4 +83,4 @@ HEALTHCHECK CMD /check.sh
 WORKDIR /var/www
 
 EXPOSE 80
-CMD /start.sh
+ENTRYPOINT [ "/start.sh" ]
