@@ -8,20 +8,20 @@ APACHE_SECRETS_CONF_FILE="/etc/apache2/conf-enabled/secrets.conf"
 if [ -d "/run/secrets/" ]; then
 find /run/secrets/ -type f| while read secret
 	do
-		name=`basename $secret`
-		value=`cat $secret`
+		name=$(basename $secret)
+		value=$(cat $secret)
 		echo "SetEnv $name $value" >> $APACHE_SECRETS_CONF_FILE
 	done
 fi
 
 initSf () {
-	CURRENT_DIR=`dirname $SYMFONY_DIRECTORY/$1`
+	CURRENT_DIR=$(dirname $SYMFONY_DIRECTORY/$1)
 	cd $CURRENT_DIR
-	ENV_NAME="$(basename `pwd`)"
+	ENV_NAME="$(basename $CURRENT_DIR)"
 	INIT_NAME="SYMFONY_INIT_${ENV_NAME,,}"
 	PRE_NAME="SYMFONY_PREV_${ENV_NAME,,}"
 	POST_NAME="SYMFONY_POST_${ENV_NAME,,}"
-	echo $ENV_NAME
+	echo $ENV_NAME " ddd"
 	if [ ${!PRE_NAME} ]; then
 		if [ -f ${!PRE_NAME} ]; then
 			chmod +x ${!PRE_NAME}
