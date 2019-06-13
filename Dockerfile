@@ -26,6 +26,7 @@ ENV APACHE_RUN_USER=www-data \
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update && \
 	DEBIAN_FRONTEND=noninteractive apt-get -yq install \
+		bash-completion \
 		curl \
 		unzip \
 		git \
@@ -58,6 +59,8 @@ RUN apt-get update && \
 	usermod -u ${PUID} www-data && \
 	groupmod -g ${PGID} www-data && \
 	usermod -s /bin/bash www-data && \
+	mkdir -p /var/www/.composer && \
+	chown -R www-data: /var/www && \
 	echo "date.timezone = UTC" >> ${PHPCONF}/cli/php.ini && \
 	echo "date.timezone = UTC" >> ${PHPCONF}/apache2/php.ini && \
 	sed -i 's/session.save_handler = files/session.save_handler = redis/g' ${PHPCONF}/apache2/php.ini &&\
@@ -70,7 +73,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 	curl http://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && \
 	chmod a+x /usr/local/bin/php-cs-fixer && \
 	curl -LsS https://phar.phpunit.de/phpunit.phar  -o /usr/local/bin/phpunit && \
-	chmod a+x /usr/local/bin/phpunit
+	chmod a+x /usr/local/bin/phpunit && \
+	su - www-data -c "composer global require bamarni/symfony-console-autocomplete"
 
 
 COPY start.sh /start.sh
