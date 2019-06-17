@@ -12,6 +12,7 @@ LABEL version="${DOCKER_TAG}"
 
 ENV PUID ${PUID}
 ENV PGID ${PGID}
+ENV SHELL /bin/bash
 
 ENV SYMFONY_ENV=prod \
 	SYMFONY_DIRECTORY=/var/www/
@@ -74,8 +75,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 	chmod a+x /usr/local/bin/php-cs-fixer && \
 	curl -LsS https://phar.phpunit.de/phpunit.phar  -o /usr/local/bin/phpunit && \
 	chmod a+x /usr/local/bin/phpunit && \
-	su - www-data -c "composer global require bamarni/symfony-console-autocomplete"
-
+	composer global require bamarni/symfony-console-autocomplete && \
+	/root/.composer/vendor/bin/symfony-autocomplete composer > /etc/bash_completion.d/composer && \
+	su - www-data -c 'echo "source /usr/share/bash-completion/bash_completion" >> ~/.bashrc'
 
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
