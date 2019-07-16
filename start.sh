@@ -73,10 +73,10 @@ else
 fi
 
 
-chown -R www-data: $SYMFONY_DIRECTORY
+find $SYMFONY_DIRECTORY \! -user www-data -exec chown www-data: {} \;
 cd $SYMFONY_DIRECTORY
 mkdir -p /var/www/.composer
-chown -R www-data: /var/www/.composer
+find /var/www/.composer \! -user www-data -exec chown www-data: {} \;
 
 if [ -f "composer.json" ]; then
 	initSf composer.json
