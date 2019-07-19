@@ -36,6 +36,7 @@ RUN apt-get update && \
 		imagemagick \
 		php${PHPVERSION} \
 		php${PHPVERSION}-mysql \
+		php${PHPVERSION}-pgsql \
 		php${PHPVERSION}-redis \
 		php${PHPVERSION}-cli \
 		php${PHPVERSION}-curl \
