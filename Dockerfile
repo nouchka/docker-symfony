@@ -70,7 +70,8 @@ RUN apt-get update && \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
 	php /usr/local/bin/composer self-update && \
-	curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony && \
+	curl -sS https://get.symfony.com/cli/installer | bash && \
+	mv /root/.symfony/bin/symfony /usr/local/bin/symfony && \
 	chmod a+x /usr/local/bin/symfony && \
 	curl http://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && \
 	chmod a+x /usr/local/bin/php-cs-fixer && \

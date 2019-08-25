@@ -18,3 +18,19 @@ build: build-latest
 .PHONY: test
 test:
 	docker-compose -f docker-compose.test.yml up
+
+.PHONY: check
+check: 
+	$(foreach version,$(VERSIONS), $(MAKE) -s check-version VERSION=$(version);)
+
+.PHONY: check-version
+check-version:
+	docker run --rm --entrypoint symfony nouchka/symfony:$(VERSION) -V
+
+.PHONY: clean
+clean: 
+	$(foreach version,$(VERSIONS), $(MAKE) -s clean-version VERSION=$(version);)
+
+.PHONY: clean-version
+clean-version:
+	docker rmi nouchka/symfony:$(VERSION)
