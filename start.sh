@@ -59,7 +59,7 @@ EOF
 			echo "File missing "${!POST_NAME}
 		fi
 	fi
-	chown -R www-data: .
+	find . ! -user www-data -exec chown www-data: {} \;
 }
 export -f initSf
 
