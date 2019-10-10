@@ -5,9 +5,10 @@ rm -rf /var/www/html/
 chown -R www-data: /var/www
 su www-data <<'EOF'
 cd /var/www
-symfony new site3 lts
-sed -i 's/<h1>/<h1>{{ app.request.server.get("TEST_SECRET") }}/g' /var/www/site3/app/Resources/views/default/index.html.twig
-sed -i 's/<h1>/<h1>{{ app.request.server.get("TEST_VARIABLE") }}/g' /var/www/site3/app/Resources/views/default/index.html.twig
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+symfony local:new site3
+cd site3/ && composer config extra.symfony.allow-contrib true && composer require --dev symfony/profiler-pack && composer require symfony/apache-pack
 EOF
 
 ##Regular entrypoint

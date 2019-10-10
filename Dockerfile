@@ -1,10 +1,10 @@
-ARG  BASE_IMAGE=jessie
+ARG  BASE_IMAGE=buster
 FROM debian:${BASE_IMAGE}
 LABEL maintainer docker@katagena.com
 LABEL org.label-schema.vcs-url="https://github.com/nouchka/docker-symfony"
 
-ARG PHPVERSION=5
-ARG PHPCONF=/etc/php${PHPVERSION}
+ARG PHPVERSION=7.3
+ARG PHPCONF=/etc/php/${PHPVERSION}
 ARG DOCKER_TAG=${PHPVERSION}
 ARG PUID=1000
 ARG PGID=1000

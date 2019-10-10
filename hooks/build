@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-LATEST_VERSION="5"
+LATEST_VERSION="7.3"
 
 if [ "$DOCKER_TAG" = "latest" ]; then
 	PHPVERSION=$LATEST_VERSION
