@@ -27,7 +27,7 @@ else
 	exit 1
 fi
 
-docker build -t ${IMAGE_NAME} --no-cache \
+docker build -t ${IMAGE_NAME} \
 	-f $DOCKERFILE \
 	--build-arg=BASE_IMAGE=$BASE_IMAGE \
 	--build-arg=PHPVERSION=$PHPVERSION \
