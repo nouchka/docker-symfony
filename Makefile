@@ -7,9 +7,14 @@ VERSIONS=5 7.0 7.3
 build-latest:
 	$(MAKE) -s build-version VERSION=latest
 
+build-beta:
+	$(MAKE) -s build-version VERSION=beta
+
 build-version:
 	@chmod +x ./hooks/build
 	DOCKER_TAG=$(VERSION) IMAGE_NAME=$(DOCKER_NAMESPACE)/$(DOCKER_IMAGE):$(VERSION) ./hooks/build
+	docker run -it --rm --entrypoint php $(DOCKER_NAMESPACE)/$(DOCKER_IMAGE):$(VERSION) -v > packages.$(VERSION).tmp
+	docker run -it --rm --entrypoint php $(DOCKER_NAMESPACE)/$(DOCKER_IMAGE):$(VERSION) -m >> packages.$(VERSION).tmp
 
 .PHONY: build
 build: build-latest

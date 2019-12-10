@@ -12,11 +12,27 @@
 Version follows php version
 
 * latest
+* 7.4 (beta)
+* 7.3 (latest)
 * 7.0
 * 5
 
 # Image
 This image setup a apache2/php container with composer, symfony cmd, php-cs-fixer, xdebug, memcache and imagemagick. It fixs datetime to UTC and sessions are save to redis container.
+
+Features list :
+* apache with php
+* imagemagik extension
+* redis extension
+* xdebug extension
+* pdo, pdo_mysql, pdo_pgsql
+* curl, pdo_sqlite
+* composer bin
+* symfony bin
+* bash completion for symfony
+* bash completion for composer
+* php-cs-fixer bin
+* phpunit
 
 Starting script :
 * disable xdebug on production

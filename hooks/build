@@ -2,7 +2,9 @@
 
 LATEST_VERSION="7.3"
 
-if [ "$DOCKER_TAG" = "latest" ]; then
+if [ "$DOCKER_TAG" = "beta" ]; then
+	PHPVERSION=7.4
+elif [ "$DOCKER_TAG" = "latest" ]; then
 	PHPVERSION=$LATEST_VERSION
 else
 	PHPVERSION=$DOCKER_TAG
@@ -10,7 +12,10 @@ fi
 
 PHPCONF=/etc/php/${PHPVERSION}
 
-if [ "$PHPVERSION" = "7.3" ]; then
+DOCKERFILE=Dockerfile
+if [ "$DOCKER_TAG" = "beta" ]; then
+	DOCKERFILE=Dockerfile-8
+elif [ "$PHPVERSION" = "7.3" ]; then
 	BASE_IMAGE=buster
 elif [ "$PHPVERSION" = "7.0" ]; then
 	BASE_IMAGE=stretch
@@ -22,7 +27,8 @@ else
 	exit 1
 fi
 
-docker build -t ${IMAGE_NAME} \
+docker build -t ${IMAGE_NAME} --no-cache \
+	-f $DOCKERFILE \
 	--build-arg=BASE_IMAGE=$BASE_IMAGE \
 	--build-arg=PHPVERSION=$PHPVERSION \
 	--build-arg=PHPCONF=$PHPCONF \
