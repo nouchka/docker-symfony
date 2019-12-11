@@ -19,8 +19,9 @@ build-version:
 build: build-latest
 	$(foreach version,$(VERSIONS), $(MAKE) -s build-version VERSION=$(version);)
 
-.PHONY: versions
-check: 
+.PHONY: check
+check:
+	$(MAKE) -s check-version VERSION=latest
 	$(foreach version,$(VERSIONS), $(MAKE) -s check-version VERSION=$(version);)
 
 .PHONY: test
