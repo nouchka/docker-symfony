@@ -67,7 +67,7 @@ RUN apt-get update \
 		libicu-dev=* \
 		--no-install-recommends \
 	&& docker-php-ext-configure intl \
-	&& docker-php-ext-install opcache intl pgsql pdo pdo_pgsql pdo_mysql \
+	&& docker-php-ext-install opcache intl pgsql pdo pdo_pgsql pdo_mysql sockets \
 	&& docker-php-ext-enable redis xdebug && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 

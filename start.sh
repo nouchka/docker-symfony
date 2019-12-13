@@ -69,9 +69,9 @@ elif [ "$SYMFONY_ENV" == "test" ]; then
 	echo "Env "$SYMFONY_ENV
 else
 	echo "Env "$SYMFONY_ENV
-	phpdismod xdebug
+	[ ! -f "$PHP_INI_DIR/php.ini-production" ] || cp "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+	[ ! -f "/usr/sbin/phpdismod" ] || phpdismod xdebug
 fi
-
 
 find $SYMFONY_DIRECTORY \! -user www-data -exec chown www-data: {} \;
 cd $SYMFONY_DIRECTORY
