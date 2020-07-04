@@ -1,5 +1,5 @@
 DOCKER_IMAGE=symfony
-VERSIONS=5 7.0 7.3
+VERSIONS=5 7.0 7.3 7.4
 
 include Makefile.docker
 

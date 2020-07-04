@@ -1,5 +1,5 @@
-ARG  PHPVERSION=7.4
-FROM php:${PHPVERSION}-apache
+ARG  PHPVERSION=8.0
+FROM php:${PHPVERSION}-rc-apache-buster
 LABEL maintainer docker@katagena.com
 LABEL org.label-schema.vcs-url="https://github.com/nouchka/docker-symfony"
 
@@ -58,17 +58,13 @@ RUN apt-get update \
 	chmod a+x /usr/local/bin/phpunit && \
 	composer global require bamarni/symfony-console-autocomplete && \
 	/root/.composer/vendor/bin/symfony-autocomplete composer > /etc/bash_completion.d/composer && \
-	su - www-data -c 'echo "source /usr/share/bash-completion/bash_completion" >> ~/.bashrc' && \
-	export CFLAGS="$PHP_CFLAGS" CPPFLAGS="$PHP_CPPFLAGS" LDFLAGS="$PHP_LDFLAGS" \
-	&& pecl install redis \
-	&& pecl install xdebug \
-	&& apt-get -y install \
-		libpq-dev=* \
-		libicu-dev=* \
-		--no-install-recommends \
-	&& docker-php-ext-configure intl \
-	&& docker-php-ext-install opcache intl pgsql pdo pdo_pgsql pdo_mysql sockets \
-	&& docker-php-ext-enable redis xdebug && \
+	su - www-data -c 'echo "source /usr/share/bash-completion/bash_completion" >> ~/.bashrc'  && \
+	curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/5.3.0.tar.gz \
+	&& tar xfz /tmp/redis.tar.gz \
+	&& rm -r /tmp/redis.tar.gz \
+	&& mkdir -p /usr/src/php/ext/ \
+	&& mv phpredis-5.3.0 /usr/src/php/ext/redis \
+	&& docker-php-ext-install redis && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY start.sh /start.sh
