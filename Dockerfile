@@ -50,7 +50,7 @@ RUN apt-get update && \
 	[ "$PHPVERSION" != "5" ] || apt-get -yq install php${PHPVERSION}-memcache && \
 	[ "$PHPVERSION" != "5" ] || ln -s /usr/sbin/php5dismod /usr/sbin/phpdismod && \
 	[ "$PHPVERSION" == "5" ] || apt-get -yq install php${PHPVERSION}-pdo-sqlite libnghttp2-dev php-memcache php${PHPVERSION}-xml php-mbstring zip librsvg2-2 && \
-	[ "$PHPVERSION" == "7.3" ] || apt-get -yq install php${PHPVERSION}-mcrypt && \
+	[[ "$PHPVERSION" == "7.3" || "$PHPVERSION" == "7.4" ]] || apt-get -yq install php${PHPVERSION}-mcrypt && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
 	a2enmod rewrite && \
 	a2enmod macro && \
