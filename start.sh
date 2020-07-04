@@ -21,7 +21,7 @@ initSf () {
 	INIT_NAME="SYMFONY_INIT_${ENV_NAME,,}"
 	PRE_NAME="SYMFONY_PREV_${ENV_NAME,,}"
 	POST_NAME="SYMFONY_POST_${ENV_NAME,,}"
-	echo $ENV_NAME " ddd"
+	echo $ENV_NAME
 	if [ ${!PRE_NAME} ]; then
 		if [ -f ${!PRE_NAME} ]; then
 			chmod +x ${!PRE_NAME}
