@@ -3,7 +3,7 @@ FROM debian:${BASE_IMAGE}
 LABEL maintainer docker@katagena.com
 LABEL org.label-schema.vcs-url="https://github.com/nouchka/docker-symfony"
 
-ARG PHPVERSION=7.3
+ARG PHPVERSION=7.4
 ARG PHPCONF=/etc/php/${PHPVERSION}
 ARG DOCKER_TAG=${PHPVERSION}
 ARG PUID=1000
@@ -47,10 +47,7 @@ RUN apt-get update && \
 		php${PHPVERSION}-apcu \
 		php${PHPVERSION}-memcached \
 		libapache2-mod-php${PHPVERSION} && \
-	[ "$PHPVERSION" != "5" ] || apt-get -yq install php${PHPVERSION}-memcache && \
-	[ "$PHPVERSION" != "5" ] || ln -s /usr/sbin/php5dismod /usr/sbin/phpdismod && \
-	[ "$PHPVERSION" == "5" ] || apt-get -yq install php${PHPVERSION}-pdo-sqlite libnghttp2-dev php-memcache php${PHPVERSION}-xml php-mbstring zip librsvg2-2 && \
-	[[ "$PHPVERSION" == "7.3" || "$PHPVERSION" == "7.4" ]] || apt-get -yq install php${PHPVERSION}-mcrypt && \
+	apt-get -yq install php${PHPVERSION}-pdo-sqlite libnghttp2-dev php-memcache php${PHPVERSION}-xml php-mbstring zip librsvg2-2 && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
 	a2enmod rewrite && \
 	a2enmod macro && \
@@ -66,9 +63,8 @@ RUN apt-get update && \
 	echo "date.timezone = UTC" >> ${PHPCONF}/cli/php.ini && \
 	echo "date.timezone = UTC" >> ${PHPCONF}/apache2/php.ini && \
 	sed -i 's/session.save_handler = files/session.save_handler = redis/g' ${PHPCONF}/apache2/php.ini &&\
-	echo 'session.save_path = tcp://redis:6379' >> ${PHPCONF}/apache2/php.ini
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+	echo 'session.save_path = tcp://redis:6379' >> ${PHPCONF}/apache2/php.ini && \
+	curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
 	php /usr/local/bin/composer self-update && \
 	curl -sS https://get.symfony.com/cli/installer | bash && \
 	mv /root/.symfony/bin/symfony /usr/local/bin/symfony && \

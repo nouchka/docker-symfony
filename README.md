@@ -12,10 +12,8 @@
 Version follows php version
 
 * latest
-* 7.4 (beta)
-* 7.3 (latest)
-* 7.0
-* 5
+* 8 (beta)
+* 7.4 (latest)
 
 # Image
 This image setup a apache2/php container with composer, symfony cmd, php-cs-fixer, xdebug, memcache and imagemagick. It fixs datetime to UTC and sessions are save to redis container.

@@ -17,13 +17,6 @@ if [ "$DOCKER_TAG" = "beta" ]; then
 	DOCKERFILE=Dockerfile-8
 elif [ "$PHPVERSION" = "7.4" ]; then
 	BASE_IMAGE=bullseye
-elif [ "$PHPVERSION" = "7.3" ]; then
-	BASE_IMAGE=buster
-elif [ "$PHPVERSION" = "7.0" ]; then
-	BASE_IMAGE=stretch
-elif [ "$PHPVERSION" = "5" ]; then
-	BASE_IMAGE=jessie
-	PHPCONF=/etc/php${PHPVERSION}
 else
 	echo "Need to specify base image"
 	exit 1
