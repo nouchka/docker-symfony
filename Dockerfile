@@ -1,4 +1,4 @@
-ARG  BASE_IMAGE=buster
+ARG  BASE_IMAGE=bullseye
 FROM debian:${BASE_IMAGE}
 LABEL maintainer docker@katagena.com
 LABEL org.label-schema.vcs-url="https://github.com/nouchka/docker-symfony"
