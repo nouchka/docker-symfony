@@ -4,6 +4,7 @@ LABEL maintainer docker@katagena.com
 LABEL org.label-schema.vcs-url="https://github.com/nouchka/docker-symfony"
 
 ARG PHPCONF=/etc/php/${PHPVERSION}
+ARG REDISCLIENTVERSION=5.3.2
 ARG DOCKER_TAG=${PHPVERSION}
 ARG PUID=1000
 ARG PGID=1000
@@ -57,13 +58,13 @@ RUN apt-get update \
 	curl -LsS https://phar.phpunit.de/phpunit.phar  -o /usr/local/bin/phpunit && \
 	chmod a+x /usr/local/bin/phpunit && \
 	composer global require bamarni/symfony-console-autocomplete && \
-	/root/.composer/vendor/bin/symfony-autocomplete composer > /etc/bash_completion.d/composer && \
-	su - www-data -c 'echo "source /usr/share/bash-completion/bash_completion" >> ~/.bashrc'  && \
-	curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/5.3.0.tar.gz \
+	/root/.composer/vendor/bin/symfony-autocomplete composer > /etc/bash_completion.d/composer
+RUN	su - www-data -c 'echo "source /usr/share/bash-completion/bash_completion" >> ~/.bashrc'  && \
+	curl -L -o /tmp/redis.tar.gz https://github.com/phpredis/phpredis/archive/$REDISCLIENTVERSION.tar.gz \
 	&& tar xfz /tmp/redis.tar.gz \
 	&& rm -r /tmp/redis.tar.gz \
 	&& mkdir -p /usr/src/php/ext/ \
-	&& mv phpredis-5.3.0 /usr/src/php/ext/redis \
+	&& mv phpredis-$REDISCLIENTVERSION /usr/src/php/ext/redis \
 	&& docker-php-ext-install redis && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
