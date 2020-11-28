@@ -2,6 +2,9 @@
 
 [ ! -f "$APACHE_PID_FILE" ] || rm -f $APACHE_PID_FILE
 
+[ ! "$APACHE_UID" ] || usermod -u $APACHE_UID www-data
+[ ! "$APACHE_GID" ] || groupmod -g $APACHE_GID www-data
+
 ##Generate apache conf with secrets from docker
 APACHE_SECRETS_CONF_FILE="/etc/apache2/conf-enabled/secrets.conf"
 [ ! -f "$APACHE_SECRETS_CONF_FILE" ] || rm -f $APACHE_SECRETS_CONF_FILE
