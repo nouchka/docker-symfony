@@ -24,6 +24,13 @@ ENV APACHE_RUN_USER=www-data \
 	APACHE_RUN_DIR=/var/run/apache2 \
 	APACHE_PID_FILE=/var/run/apache2/apache2.pid
 
+COPY start.sh /start.sh
+COPY check.sh /check.sh
+
+# Add Tini
+ENV TINI_VERSION v0.19.0
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
+
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN apt-get update && \
 	DEBIAN_FRONTEND=noninteractive apt-get -yq install \
@@ -74,17 +81,17 @@ RUN apt-get update && \
 	curl -LsS https://phar.phpunit.de/phpunit.phar  -o /usr/local/bin/phpunit && \
 	chmod a+x /usr/local/bin/phpunit && \
 	composer global require bamarni/symfony-console-autocomplete && \
-	/root/.composer/vendor/bin/symfony-autocomplete composer > /etc/bash_completion.d/composer && \
-	su - www-data -c 'echo "source /usr/share/bash-completion/bash_completion" >> ~/.bashrc'
+	/root/.config/composer/vendor/bin/symfony-autocomplete composer > /etc/bash_completion.d/composer && \
+	su - www-data -c 'echo "source /usr/share/bash-completion/bash_completion" >> ~/.bashrc' && \
+	chmod +x /start.sh && \
+	chmod +x /check.sh && \
+	chmod +x /tini
 
-COPY start.sh /start.sh
-RUN chmod +x /start.sh
-
-COPY check.sh /check.sh
-RUN chmod +x /check.sh
 HEALTHCHECK CMD /check.sh
 
 WORKDIR /var/www
 
 EXPOSE 80
-ENTRYPOINT [ "/start.sh" ]
+
+ENTRYPOINT ["/tini", "--"]
+CMD ["/start.sh"]
