@@ -40,7 +40,6 @@ initSf () {
 			su www-data -c "composer install"
 		else
 			if [ ! -f "app/console" ]; then
-				CONSOLE="app/console"
 				mkdir -p app/
 				cd app/
 				ln -s $CURRENT_DIR/bin/console console
