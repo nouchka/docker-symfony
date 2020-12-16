@@ -3,6 +3,7 @@ FROM php:${PHPVERSION}-apache
 LABEL maintainer docker@katagena.com
 LABEL org.label-schema.vcs-url="https://github.com/nouchka/docker-symfony"
 
+ARG PHPVERSION=8.0
 ARG PHPCONF=/etc/php/${PHPVERSION}
 ARG REDISCLIENTVERSION=5.3.2
 ARG DOCKER_TAG=${PHPVERSION}

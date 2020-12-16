@@ -4,6 +4,7 @@ FROM debian:${BASE_IMAGE}
 LABEL maintainer docker@katagena.com
 LABEL org.label-schema.vcs-url="https://github.com/nouchka/docker-symfony"
 
+ARG  PHPVERSION=7.4
 ARG PHPCONF=/etc/php/${PHPVERSION}
 ARG DOCKER_TAG=${PHPVERSION}
 ARG PUID=1000
