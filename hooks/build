@@ -15,6 +15,8 @@ PHPCONF=/etc/php/${PHPVERSION}
 DOCKERFILE=Dockerfile
 if [ "$DOCKER_TAG" = "beta" ]; then
 	DOCKERFILE=Dockerfile-8
+elif [ "$PHPVERSION" = "8.0" ]; then
+	DOCKERFILE=Dockerfile-8
 elif [ "$PHPVERSION" = "7.4" ]; then
 	BASE_IMAGE=bullseye
 else

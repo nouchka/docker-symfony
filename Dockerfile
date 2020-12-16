@@ -1,9 +1,9 @@
+ARG  PHPVERSION=7.4
 ARG  BASE_IMAGE=bullseye
 FROM debian:${BASE_IMAGE}
 LABEL maintainer docker@katagena.com
 LABEL org.label-schema.vcs-url="https://github.com/nouchka/docker-symfony"
 
-ARG PHPVERSION=7.4
 ARG PHPCONF=/etc/php/${PHPVERSION}
 ARG DOCKER_TAG=${PHPVERSION}
 ARG PUID=1000
@@ -55,7 +55,6 @@ RUN apt-get update && \
 		php${PHPVERSION}-memcached \
 		libapache2-mod-php${PHPVERSION} && \
 	apt-get -yq install php${PHPVERSION}-pdo-sqlite libnghttp2-dev php-memcache php${PHPVERSION}-xml php-mbstring zip librsvg2-2 && \
-	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
 	a2enmod rewrite && \
 	a2enmod macro && \
 	a2enmod proxy && \
@@ -83,6 +82,7 @@ RUN apt-get update && \
 	composer global require bamarni/symfony-console-autocomplete && \
 	/root/.config/composer/vendor/bin/symfony-autocomplete composer > /etc/bash_completion.d/composer && \
 	su - www-data -c 'echo "source /usr/share/bash-completion/bash_completion" >> ~/.bashrc' && \
+	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
 	chmod +x /start.sh && \
 	chmod +x /check.sh && \
 	chmod +x /tini
