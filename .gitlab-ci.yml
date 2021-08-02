@@ -1,0 +1,17 @@
+stages:
+- check
+- build
+- publish
+
+build:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - apk add --update make
+    - apk add --update bash
+    - make build
+    - docker login -u nouchka -p $DOCKERHUB_TOKEN
+    - make push
+    - make check|grep -v 'warning'

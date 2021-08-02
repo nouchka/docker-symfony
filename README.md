@@ -1,11 +1,10 @@
 # docker-symfony
-
-[![Docker Hub repository](http://dockeri.co/image/nouchka/symfony)](https://registry.hub.docker.com/u/nouchka/symfony/)
-
-[![](https://images.microbadger.com/badges/image/nouchka/symfony.svg)](https://microbadger.com/images/nouchka/symfony "Get your own image badge on microbadger.com")
-[![](https://images.microbadger.com/badges/version/nouchka/symfony.svg)](https://microbadger.com/images/nouchka/symfony "Get your own version badge on microbadger.com")
+[![Docker pull](https://img.shields.io/docker/pulls/nouchka/symfony)](https://hub.docker.com/r/nouchka/symfony/)
+[![Docker stars](https://img.shields.io/docker/stars/nouchka/symfony)](https://hub.docker.com/r/nouchka/symfony/)
 [![Docker Automated buil](https://img.shields.io/docker/automated/nouchka/symfony.svg)](https://hub.docker.com/r/nouchka/symfony/)
-[![Build Status](https://travis-ci.org/nouchka/docker-symfony.svg?branch=master)](https://travis-ci.org/nouchka/docker-symfony)
+[![Build Status](https://img.shields.io/travis/com/nouchka/docker-symfony/master)](https://travis-ci.com/github/nouchka/docker-symfony)
+[![Docker size](https://img.shields.io/docker/image-size/nouchka/symfony/latest)](https://hub.docker.com/r/nouchka/symfony/)
+[![Docker layers](https://img.shields.io/microbadger/layers/nouchka/symfony/latest)](https://hub.docker.com/r/nouchka/symfony/)
 
 # Versions
 
@@ -55,7 +54,3 @@ Environment variables:
 # Todo
 
 * Use fonctionnal symfony website for docker-compose.yml, like in docker-compose.test.yml
-
-# Donate
-
-Bitcoin Address: 15NVMBpZJTvkefwfsMAFA3YhyiJ5D2zd3R
