@@ -4,7 +4,6 @@
 [![Docker Automated buil](https://img.shields.io/docker/automated/nouchka/symfony.svg)](https://hub.docker.com/r/nouchka/symfony/)
 [![Build Status](https://img.shields.io/travis/com/nouchka/docker-symfony/master)](https://travis-ci.com/github/nouchka/docker-symfony)
 [![Docker size](https://img.shields.io/docker/image-size/nouchka/symfony/latest)](https://hub.docker.com/r/nouchka/symfony/)
-[![Docker layers](https://img.shields.io/microbadger/layers/nouchka/symfony/latest)](https://hub.docker.com/r/nouchka/symfony/)
 
 # Versions
 
