@@ -76,8 +76,6 @@ RUN apt-get update && \
 	curl -sS https://get.symfony.com/cli/installer | bash && \
 	mv /root/.symfony/bin/symfony /usr/local/bin/symfony && \
 	chmod a+x /usr/local/bin/symfony && \
-	curl http://get.sensiolabs.org/php-cs-fixer.phar -o /usr/local/bin/php-cs-fixer && \
-	chmod a+x /usr/local/bin/php-cs-fixer && \
 	curl -LsS https://phar.phpunit.de/phpunit.phar  -o /usr/local/bin/phpunit && \
 	chmod a+x /usr/local/bin/phpunit && \
 	composer global require bamarni/symfony-console-autocomplete && \
