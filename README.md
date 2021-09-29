@@ -1,8 +1,7 @@
 # docker-symfony
 [![Docker pull](https://img.shields.io/docker/pulls/nouchka/symfony)](https://hub.docker.com/r/nouchka/symfony/)
 [![Docker stars](https://img.shields.io/docker/stars/nouchka/symfony)](https://hub.docker.com/r/nouchka/symfony/)
-[![Docker Automated buil](https://img.shields.io/docker/automated/nouchka/symfony.svg)](https://hub.docker.com/r/nouchka/symfony/)
-[![Build Status](https://img.shields.io/travis/com/nouchka/docker-symfony/master)](https://travis-ci.com/github/nouchka/docker-symfony)
+[![Build Status](https://gitlab.com/japromis/docker-symfony/badges/master/pipeline.svg)](https://gitlab.com/japromis/docker-symfony/pipelines)
 [![Docker size](https://img.shields.io/docker/image-size/nouchka/symfony/latest)](https://hub.docker.com/r/nouchka/symfony/)
 
 # Versions
