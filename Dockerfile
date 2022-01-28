@@ -1,12 +1,10 @@
-ARG  PHPVERSION=7.4
-ARG  BASE_IMAGE=bullseye
-FROM debian:${BASE_IMAGE}
+FROM debian:bullseye
 LABEL maintainer docker@katagena.com
 LABEL org.label-schema.vcs-url="https://github.com/nouchka/docker-symfony"
 
-ARG  PHPVERSION=7.4
-ARG PHPCONF=/etc/php/${PHPVERSION}
-ARG DOCKER_TAG=${PHPVERSION}
+ARG VERSION=7.4
+ARG PHPCONF=/etc/php/${VERSION}
+ARG DOCKER_TAG=${VERSION}
 ARG PUID=1000
 ARG PGID=1000
 LABEL version="${DOCKER_TAG}"
@@ -42,20 +40,20 @@ RUN apt-get update && \
 		memcached \
 		apache2 \
 		imagemagick \
-		php${PHPVERSION} \
-		php${PHPVERSION}-mysql \
-		php${PHPVERSION}-pgsql \
-		php${PHPVERSION}-redis \
-		php${PHPVERSION}-cli \
-		php${PHPVERSION}-curl \
-		php${PHPVERSION}-gd \
-		php${PHPVERSION}-imagick \
-		php${PHPVERSION}-intl \
-		php${PHPVERSION}-xdebug \
-		php${PHPVERSION}-apcu \
-		php${PHPVERSION}-memcached \
-		libapache2-mod-php${PHPVERSION} && \
-	apt-get -yq install php${PHPVERSION}-pdo-sqlite libnghttp2-dev php-memcache php${PHPVERSION}-xml php-mbstring zip librsvg2-2 && \
+		php${VERSION} \
+		php${VERSION}-mysql \
+		php${VERSION}-pgsql \
+		php${VERSION}-redis \
+		php${VERSION}-cli \
+		php${VERSION}-curl \
+		php${VERSION}-gd \
+		php${VERSION}-imagick \
+		php${VERSION}-intl \
+		php${VERSION}-xdebug \
+		php${VERSION}-apcu \
+		php${VERSION}-memcached \
+		libapache2-mod-php${VERSION} && \
+	apt-get -yq install php${VERSION}-pdo-sqlite libnghttp2-dev php-memcache php${VERSION}-xml php-mbstring zip librsvg2-2 && \
 	a2enmod rewrite && \
 	a2enmod macro && \
 	a2enmod proxy && \
