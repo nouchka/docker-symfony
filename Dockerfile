@@ -72,7 +72,7 @@ RUN apt-get update && \
 	curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
 	php /usr/local/bin/composer self-update && \
 	curl -sS https://get.symfony.com/cli/installer | bash && \
-	mv /root/.symfony/bin/symfony /usr/local/bin/symfony && \
+	mv /root/.symfony5/bin/symfony /usr/local/bin/symfony && \
 	chmod a+x /usr/local/bin/symfony && \
 	curl -LsS https://phar.phpunit.de/phpunit.phar  -o /usr/local/bin/phpunit && \
 	chmod a+x /usr/local/bin/phpunit && \
