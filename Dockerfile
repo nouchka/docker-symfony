@@ -76,9 +76,9 @@ RUN apt-get update && \
 	chmod a+x /usr/local/bin/symfony && \
 	curl -LsS https://phar.phpunit.de/phpunit.phar  -o /usr/local/bin/phpunit && \
 	chmod a+x /usr/local/bin/phpunit && \
-	composer global require bamarni/symfony-console-autocomplete && \
-	/root/.config/composer/vendor/bin/symfony-autocomplete composer > /etc/bash_completion.d/composer && \
-	su - www-data -c 'echo "source /usr/share/bash-completion/bash_completion" >> ~/.bashrc' && \
+##	composer global require bamarni/symfony-console-autocomplete && \
+##	/root/.config/composer/vendor/bin/symfony-autocomplete composer > /etc/bash_completion.d/composer && \
+##	su - www-data -c 'echo "source /usr/share/bash-completion/bash_completion" >> ~/.bashrc' && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
 	chmod +x /start.sh && \
 	chmod +x /check.sh && \
